@@ -80,18 +80,22 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <?php $this->endBody() ?>
 </body>
 <script>
-    let isActiveFollow = true;
-    const el = $('.follow');
-    el.on('mousemove', function (event) {
-        if (isActiveFollow) {
-            el.css('position', 'fixed');
-            el.css('left', event.clientX + -20 + 'px')
-            el.css('top', event.clientY + -20 + 'px')
-            $('body').on('mouseup', function (event) {
-                isActiveFollow = false;
-            })
+    (function ($) {
+        $.fn.followCursor = function () {
+            let isActiveFollow = true;
+            const el = $('.follow');
+            el.on('mousemove', function (event) {
+                if (isActiveFollow) {
+                    el.css('position', 'fixed');
+                    el.css('left', event.clientX + -20 + 'px')
+                    el.css('top', event.clientY + -20 + 'px')
+                    $('body').on('mouseup', function (event) {
+                        isActiveFollow = false;
+                    })
+                }
+            });
         }
-    });
+    }(jQuery))
 </script>
 </html>
 <?php $this->endPage() ?>
