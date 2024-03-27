@@ -1,0 +1,27 @@
+version: '2'
+services:
+  nginx:
+    container_name: yii-nginx
+    image: nginx:stable-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./docker/vhost.conf:/etc/nginx/conf.d/default.conf
+      - ./:/var/www/yii
+  php:
+    container_name: yii-php
+    build:
+      context: docker
+      dockerfile: php.Dockerfile
+    volumes:
+      - ./:/var/www/yii
+      - ./docker/php.ini:/usr/local/etc/php/conf.d/custom.ini
+  postgres:
+    container_name: yii-postgres
+    image: postgres:latest
+    ports:
+      - "6432:5432"
+    environment:
+      POSTGRES_DB: "yii"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "Enc0ded"
