@@ -79,5 +79,13 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
 <?php $this->endBody() ?>
 </body>
+<script>
+    const el = $('.follow');
+    el.on('mousemove', function (event) {
+        el.css('position', 'fixed');
+        el.css('left', event.clientX + -20 + 'px')
+        el.css('top', event.clientY + -20 + 'px')
+    });
+</script>
 </html>
 <?php $this->endPage() ?>
